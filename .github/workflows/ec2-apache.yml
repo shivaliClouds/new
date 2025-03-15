@@ -1,0 +1,26 @@
+name: Deploy to EC2
+
+on: push  
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: action
+        uses: actions/checkout@v3
+
+      - name: SSH Key
+        run: |
+          echo "${{ secrets.SSHKEY }}" | base64 --decode > ec2-key.pem
+          chmod 400 ec2-key.pem
+
+      - name: Install Apache on EC2
+        run: |
+          ssh -o StrictHostKeyChecking=no -i ec2-key.pem ec2-user@3.84.202.139 << 'EOF'
+          sudo apt update -y
+          sudo apt install apache2 -y
+          sudo systemctl start apache2
+          sudo systemctl enable apache2
+          echo "<h1>Hello, apache is running</h1>" | sudo tee /var/www/html/index.html
+          EOF
