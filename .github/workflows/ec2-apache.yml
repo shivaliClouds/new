@@ -1,8 +1,8 @@
 name: Deploy to EC2
 
 on: 
-  pull_request:
-    types: 
+  pull_request_target:
+    types:
       - closed
 
 jobs:
