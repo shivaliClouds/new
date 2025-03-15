@@ -26,5 +26,5 @@ jobs:
           sudo systemctl start apache2
           sudo systemctl enable apache2
 
-          echo "<h1>Hello, apache is running</h1>" | sudo tee /var/www/html/index.html
+          echo "<h1>Hello, apache is running(pull request)</h1>" | sudo tee /var/www/html/index.html
           EOF
