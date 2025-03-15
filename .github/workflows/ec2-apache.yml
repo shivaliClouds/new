@@ -1,13 +1,14 @@
 name: Deploy to EC2
 
 on: 
-  pull_request_target:
+  pull_request_review:
     types:
-      - closed
+      - submitted
 
 jobs:
   deploy:
-    if: github.event.action == 'closed' && github.event.pull_request.merged == true
+    if: >-
+      github.event.review.state == 'approved' && github.event.pull_request.merged == false
     runs-on: ubuntu-latest
 
     steps:
