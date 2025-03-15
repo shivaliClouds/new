@@ -14,6 +14,10 @@ jobs:
       - name: action
         uses: actions/checkout@v3
 
+      - name: Debug Event Data
+        run: |
+          echo "Event Data: ${{ toJson(github.event) }}"
+
       - name: SSH Key
         run: |
           echo "${{ secrets.SSHKEY }}" | base64 --decode > ec2-key.pem
