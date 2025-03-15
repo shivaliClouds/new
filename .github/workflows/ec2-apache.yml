@@ -17,10 +17,11 @@ jobs:
 
       - name: Install Apache on EC2
         run: |
-          ssh -o StrictHostKeyChecking=no -i ec2-key.pem ubuntu@3.84.202.139 << 'EOF'
+          ssh -o StrictHostKeyChecking=no -i ec2-key.pem ubuntu@3.84.202.139
           sudo apt update -y
           sudo apt install apache2 -y
           sudo systemctl start apache2
           sudo systemctl enable apache2
+
           echo "<h1>Hello, apache is running</h1>" | sudo tee /var/www/html/index.html
           EOF
